@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Feedback – Alfa Byte Computers</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap"
+    rel="stylesheet" />
+
+  <!-- EmailJS SDK — sends email directly from browser, no server needed -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+  <link rel="stylesheet" href="style.css" />
+
+  <style>
+    /* ══════════════════════════════════════════
+   FEEDBACK PAGE — ADD THIS BLOCK TO style.css
+   (Paste everything between the markers below
+    at the very END of your style.css file,
+    just before the closing line)
+══════════════════════════════════════════ */
+
+    /* ── Page wrapper pushed below fixed header ── */
+    .fb-page {
+      min-height: 100vh;
+      padding-top: 94px;
+      /* same as header height */
+      padding-bottom: 60px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── Hero strip ── */
+    .fb-hero {
+      padding: 56px 24px 44px;
+      text-align: center;
+    }
+
+    .fb-hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(234, 88, 12, .18);
+      border: 1px solid rgba(234, 88, 12, .45);
+      border-radius: 50px;
+      padding: 6px 20px;
+      color: var(--orange-light);
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 18px;
+      backdrop-filter: blur(8px);
+    }
+
+    .fb-hero-badge::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--orange-light);
+      display: block;
+      animation: blink 2s infinite;
+    }
+
+    .fb-hero h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(28px, 5vw, 54px);
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.15;
+      text-shadow: 0 2px 40px rgba(210, 140, 40, .4);
+      margin-bottom: 10px;
+    }
+
+    .fb-hero h1 span {
+      color: var(--orange-light);
+    }
+
+    .fb-hero p {
+      font-size: clamp(13px, 1.8vw, 16px);
+      color: rgba(255, 220, 160, .75);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    /* ── Card ── */
+    .fb-card {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .fb-card-inner {
+      background: rgba(255, 255, 255, .06);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, .12);
+      border-radius: 24px;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, .5),
+        0 0 0 1px rgba(234, 88, 12, .1);
+      overflow: hidden;
+    }
+
+    /* Card header gradient strip */
+    .fb-card-header {
+      background: linear-gradient(135deg,
+          rgba(74, 29, 150, .85) 0%,
+          rgba(91, 33, 182, .75) 60%,
+          rgba(45, 6, 104, .9) 100%);
+      padding: 28px 36px 22px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .fb-card-header::after {
+      content: '';
+      position: absolute;
+      right: -40px;
+      top: -40px;
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      background: rgba(234, 88, 12, .12);
+    }
+
+    .fb-card-header::before {
+      content: '';
+      position: absolute;
+      left: -30px;
+      bottom: -50px;
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .03);
+    }
+
+    .fb-card-title {
+      font-family: var(--font-serif);
+      font-size: 22px;
+      font-weight: 700;
+      color: #fff;
+      position: relative;
+      z-index: 1;
+    }
+
+    .fb-card-subtitle {
+      font-size: 13px;
+      color: rgba(255, 255, 255, .55);
+      margin-top: 4px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── Form body ── */
+    .fb-body {
+      padding: 36px;
+    }
+
+    /* Star rating */
+    .rating-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 28px;
+    }
+
+    .rating-label-text {
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--purple);
+      letter-spacing: .3px;
+      text-transform: uppercase;
+    }
+
+    .rating-label-text .req {
+      color: var(--orange);
+      margin-left: 2px;
+    }
+
+    .stars {
+      display: flex;
+      gap: 6px;
+      flex-direction: row-reverse;
+      justify-content: flex-end;
+    }
+
+    .stars input {
+      display: none;
+    }
+
+    .stars label {
+      font-size: 36px;
+      color: rgba(255, 255, 255, .2);
+      cursor: pointer;
+      transition: color .2s, transform .2s;
+      line-height: 1;
+    }
+
+    .stars input:checked~label,
+    .stars label:hover,
+    .stars label:hover~label {
+      color: #fbbf24;
+      transform: scale(1.15);
+    }
+
+    .rating-text {
+      font-size: 12px;
+      color: rgba(255, 200, 100, .7);
+      min-height: 18px;
+      letter-spacing: .3px;
+    }
+
+    /* Form grid */
+    .fb-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px 24px;
+    }
+
+    .fb-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .fb-group.full {
+      grid-column: 1 / -1;
+    }
+
+    .fb-label {
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--purple);
+      letter-spacing: .3px;
+      text-transform: uppercase;
+    }
+
+    .fb-label .req {
+      color: var(--orange);
+      margin-left: 2px;
+    }
+
+    .fb-input,
+    .fb-select,
+    .fb-textarea {
+      width: 100%;
+      padding: 13px 16px;
+      border: 1.5px solid rgba(255, 255, 255, .12);
+      border-radius: 10px;
+      font-family: var(--font-head);
+      font-size: 14px;
+      color: #f8fafc;
+      background: rgba(255, 255, 255, .07);
+      backdrop-filter: blur(6px);
+      outline: none;
+      transition: all .25s;
+      appearance: none;
+    }
+
+    .fb-input:focus,
+    .fb-select:focus,
+    .fb-textarea:focus {
+      border-color: var(--purple-light);
+      background: rgba(255, 255, 255, .11);
+      box-shadow: 0 0 0 3px rgba(167, 139, 250, .15);
+    }
+
+    .fb-input::placeholder,
+    .fb-textarea::placeholder {
+      color: rgba(255, 255, 255, .3);
+    }
+
+    .fb-input.error,
+    .fb-select.error {
+      border-color: #f87171;
+      box-shadow: 0 0 0 3px rgba(248, 113, 113, .12);
+    }
+
+    .fb-input.ok {
+      border-color: #4ade80;
+    }
+
+    /* Select arrow */
+    .fb-select-wrap {
+      position: relative;
+    }
+
+    .fb-select-wrap::after {
+      content: '▾';
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--orange-light);
+      pointer-events: none;
+      font-size: 14px;
+    }
+
+    .fb-select {
+      cursor: pointer;
+      padding-right: 36px;
+      color: #f8fafc;
+    }
+
+    .fb-select option {
+      background: #0d1117;
+      color: #f8fafc;
+    }
+
+    .fb-textarea {
+      resize: vertical;
+      min-height: 110px;
+      line-height: 1.65;
+    }
+
+    /* Divider */
+    .fb-divider {
+      grid-column: 1 / -1;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      color: rgba(255, 255, 255, .2);
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin: 4px 0;
+    }
+
+    .fb-divider::before,
+    .fb-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(255, 255, 255, .08);
+    }
+
+    /* Emoji reaction row */
+    .emoji-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .emoji-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      padding: 10px 16px;
+      border-radius: 10px;
+      border: 1.5px solid rgba(255, 255, 255, .12);
+      background: rgba(255, 255, 255, .05);
+      cursor: pointer;
+      transition: all .2s;
+      font-size: 24px;
+      color: rgba(255, 255, 255, .6);
+      font-family: var(--font-head);
+      font-size: 11px;
+      position: relative;
+    }
+
+    .emoji-btn span.em {
+      font-size: 26px;
+      display: block;
+    }
+
+    .emoji-btn:hover {
+      border-color: var(--orange-light);
+      background: rgba(234, 88, 12, .12);
+    }
+
+    .emoji-btn.selected {
+      border-color: var(--orange-light);
+      background: rgba(234, 88, 12, .18);
+      box-shadow: 0 0 16px rgba(234, 88, 12, .25);
+      color: var(--orange-light);
+    }
+
+    /* Submit */
+    .fb-submit-wrap {
+      margin-top: 30px;
+    }
+
+    .fb-btn-submit {
+      width: 100%;
+      padding: 16px;
+      background: linear-gradient(135deg, var(--orange) 0%, #c94d0a 100%);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      font-family: var(--font-head);
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: .3px;
+      cursor: pointer;
+      transition: all .3s;
+      box-shadow: 0 6px 24px rgba(234, 88, 12, .4);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .fb-btn-submit::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255, 255, 255, .15), transparent);
+      opacity: 0;
+      transition: opacity .3s;
+    }
+
+    .fb-btn-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(234, 88, 12, .55);
+    }
+
+    .fb-btn-submit:hover::before {
+      opacity: 1;
+    }
+
+    .fb-btn-submit:disabled {
+      opacity: .55;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .fb-note {
+      text-align: center;
+      margin-top: 14px;
+      font-size: 12.5px;
+      color: rgba(255, 255, 255, .35);
+    }
+
+    .fb-note a {
+      color: var(--orange-light);
+      text-decoration: none;
+    }
+
+    /* ── Success card ── */
+    .fb-success {
+      display: none;
+      max-width: 560px;
+      margin: 40px auto 0;
+      padding: 0 24px;
+    }
+
+    .fb-success-inner {
+      background: rgba(255, 255, 255, .07);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, .14);
+      border-radius: 24px;
+      padding: 52px 40px;
+      text-align: center;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, .45);
+    }
+
+    .fb-success-icon {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+      margin: 0 auto 24px;
+      box-shadow: 0 8px 28px rgba(34, 197, 94, .35);
+      animation: popIn .5s cubic-bezier(.34, 1.56, .64, 1) both;
+    }
+
+    @keyframes popIn {
+      from {
+        transform: scale(0);
+        opacity: 0
+      }
+
+      to {
+        transform: scale(1);
+        opacity: 1
+      }
+    }
+
+    .fb-success-title {
+      font-family: var(--font-serif);
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--purple);
+      margin-bottom: 10px;
+    }
+
+    .fb-success-msg {
+      font-size: 15px;
+      color: rgba(255, 255, 255, .65);
+      line-height: 1.75;
+      margin-bottom: 30px;
+    }
+
+    .fb-success-detail {
+      background: rgba(255, 255, 255, .06);
+      border: 1px solid rgba(255, 255, 255, .1);
+      border-radius: 12px;
+      padding: 18px 22px;
+      margin-bottom: 28px;
+      text-align: left;
+    }
+
+    .fb-success-detail p {
+      font-size: 13.5px;
+      color: rgba(255, 255, 255, .75);
+      margin-bottom: 6px;
+    }
+
+    .fb-success-detail p:last-child {
+      margin: 0;
+    }
+
+    .fb-success-detail strong {
+      color: var(--orange-light);
+    }
+
+    .fb-btn-back {
+      padding: 13px 32px;
+      background: rgba(167, 139, 250, .2);
+      border: 1.5px solid rgba(167, 139, 250, .4);
+      color: var(--purple-light);
+      border-radius: 10px;
+      font-family: var(--font-head);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: all .3s;
+      backdrop-filter: blur(6px);
+    }
+
+    .fb-btn-back:hover {
+      background: rgba(167, 139, 250, .3);
+      border-color: var(--purple-light);
+    }
+
+    /* Trust row */
+    .fb-trust {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 32px;
+      max-width: 780px;
+      padding: 0 24px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .fb-trust-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, .06);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, .1);
+      border-radius: 50px;
+      padding: 8px 18px;
+      color: rgba(255, 220, 160, .75);
+      font-size: 12.5px;
+    }
+
+    /* Mini footer */
+    .fb-footer {
+      background: rgba(0, 0, 0, .4);
+      backdrop-filter: blur(15px);
+      border-top: 1px solid rgba(255, 255, 255, .05);
+      padding: 20px 24px;
+      text-align: center;
+      margin-top: 60px;
+    }
+
+    .fb-footer p {
+      font-size: 13px;
+      color: rgba(255, 255, 255, .3);
+    }
+
+    .fb-footer strong {
+      color: var(--orange-light);
+    }
+
+    /* Spinner inside button */
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .spinner {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(255, 255, 255, .4);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin .7s linear infinite;
+      vertical-align: middle;
+      margin-right: 8px;
+    }
+
+    /* Responsive */
+    @media(max-width:640px) {
+      .fb-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .fb-body {
+        padding: 22px 18px;
+      }
+
+      .fb-card-header {
+        padding: 22px 20px 18px;
+      }
+
+      .emoji-row {
+        gap: 7px;
+      }
+
+      .emoji-btn {
+        padding: 8px 12px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ── Animated water background (same canvas as homepage) ── -->
+  <canvas id="bgCanvas"></canvas>
+
+  <!-- ══════════ HEADER ══════════ -->
+  <header class="header" id="mainHeader">
+    <div class="header-top">
+      <span>📞 Admissions Open &nbsp;|&nbsp; <strong>Call: +91 9175519757</strong> &nbsp;|&nbsp; ✉
+        47210020@mkcl.org</span>
+    </div>
+    <nav class="nav-wrap">
+      <a href="index.html" class="logo-area">
+        <div class="logo-svg-wrap">
+          <img src="images/logo.png" alt="Alfa Byte Logo"
+            style="width: 44px; height: 44px; border-radius: 50%; object-fit: cover;">
+        </div>
+        <div class="logo-text-wrap">
+          <span class="logo-name">Alfa Byte</span>
+          <span class="logo-tagline">Computers · Indapur</span>
+        </div>
+      </a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="courses.html">Courses</a>
+        <a href="index.html#features">Why Us</a>
+        <a href="feedback.html" class="active">Feedback</a>
+        <a href="enroll.html" class="nav-cta">Enroll Now</a>
+      </div>
+      <div class="hamburger" id="hamburgerBtn">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ══════════ PAGE ══════════ -->
+  <div class="fb-page">
+
+    <!-- Hero -->
+    <div class="fb-hero">
+      <div class="fb-hero-badge">Your Opinion Matters</div>
+      <h1>Share Your <span>Feedback</span></h1>
+      <p>Help us improve · Takes only 2 minutes</p>
+    </div>
+
+    <!-- ══ FORM CARD ══ -->
+    <div class="fb-card" id="feedbackCard">
+      <div class="fb-card-inner">
+
+        <div class="fb-card-header">
+          <div class="fb-card-title">📝 Feedback Form</div>
+          <div class="fb-card-subtitle">All fields marked * are required</div>
+        </div>
+
+        <div class="fb-body">
+          <form id="feedbackForm" novalidate>
+
+            <!-- ★ STAR RATING -->
+            <div class="rating-wrap">
+              <div class="rating-label-text">Overall Rating <span class="req">*</span></div>
+              <div class="stars" id="starGroup">
+                <input type="radio" name="rating" id="s5" value="5" /><label for="s5" title="Excellent">★</label>
+                <input type="radio" name="rating" id="s4" value="4" /><label for="s4" title="Good">★</label>
+                <input type="radio" name="rating" id="s3" value="3" /><label for="s3" title="Average">★</label>
+                <input type="radio" name="radio" id="s2" value="2" /><label for="s2" title="Poor">★</label>
+                <input type="radio" name="rating" id="s1" value="1" /><label for="s1" title="Terrible">★</label>
+              </div>
+              <div class="rating-text" id="ratingText">Click a star to rate</div>
+            </div>
+
+            <div class="fb-grid">
+
+              <!-- Personal Info -->
+              <div class="fb-divider">Personal Information</div>
+
+              <div class="fb-group">
+                <label class="fb-label">First Name <span class="req">*</span></label>
+                <input class="fb-input" type="text" id="firstName" placeholder="e.g. Rahul" required
+                  autocomplete="given-name" />
+              </div>
+
+              <div class="fb-group">
+                <label class="fb-label">Surname <span class="req">*</span></label>
+                <input class="fb-input" type="text" id="lastName" placeholder="e.g. Patil" required
+                  autocomplete="family-name" />
+              </div>
+
+              <div class="fb-group">
+                <label class="fb-label">Mobile Number</label>
+                <input class="fb-input" type="tel" id="mobile" placeholder="10-digit number" maxlength="10" />
+              </div>
+
+              <div class="fb-group">
+                <label class="fb-label">Email Address</label>
+                <input class="fb-input" type="email" id="email" placeholder="yourname@email.com" autocomplete="email" />
+              </div>
+
+              <!-- Occupation -->
+              <div class="fb-divider">Background</div>
+
+              <div class="fb-group">
+                <label class="fb-label">Occupation <span class="req">*</span></label>
+                <div class="fb-select-wrap">
+                  <select class="fb-select" id="occupation" required>
+                    <option value="">— Select your occupation —</option>
+                    <optgroup label="🎓 Students">
+                      <option value="School Student (8th–10th)">School Student (8th–10th)</option>
+                      <option value="HSC Student (11th–12th)">HSC Student (11th–12th)</option>
+                      <option value="College Student">College Student</option>
+                    </optgroup>
+                    <optgroup label="💼 Professionals">
+                      <option value="Graphic Designer">Graphic Designer</option>
+                      <option value="Video Editor">Video Editor</option>
+                      <option value="Web Developer">Web Developer</option>
+                      <option value="Software Developer">Software Developer</option>
+                      <option value="Data Analyst">Data Analyst</option>
+                      <option value="Content Creator">Content Creator</option>
+                      <option value="Digital Marketer">Digital Marketer</option>
+                      <option value="Accountant / Tally Operator">Accountant / Tally Operator</option>
+                      <option value="Government Employee">Government Employee</option>
+                      <option value="Teacher / Faculty">Teacher / Faculty</option>
+                      <option value="Business Owner">Business Owner</option>
+                    </optgroup>
+                    <optgroup label="👨‍👩‍👧 Others">
+                      <option value="Homemaker">Homemaker</option>
+                      <option value="Job Seeker">Job Seeker</option>
+                      <option value="Freelancer">Freelancer</option>
+                      <option value="Other">Other</option>
+                    </optgroup>
+                  </select>
+                </div>
+              </div>
+
+              <div class="fb-group">
+                <label class="fb-label">Course Attended</label>
+                <div class="fb-select-wrap">
+                  <select class="fb-select" id="course">
+                    <option value="">— Select course —</option>
+                    <option>MS-CIT</option>
+                    <option>KLiC Tally Prime with GST</option>
+                    <option>KLiC Advanced Tally Pro</option>
+                    <option>KLiC Graphic Designing</option>
+                    <option>KLiC Photoshop</option>
+                    <option>KLiC DTP CorelDRAW / Adobe</option>
+                    <option>KLiC Video Editing</option>
+                    <option>KLiC Web Designing</option>
+                    <option>KLiC HTML &amp; CSS</option>
+                    <option>KLiC Python Programming</option>
+                    <option>KLiC C &amp; C++ Programming</option>
+                    <option>KLiC Java</option>
+                    <option>KLiC Artificial Intelligence</option>
+                    <option>KLiC Foundation of AI &amp; ML</option>
+                    <option>KLiC Excel Analytics Pro</option>
+                    <option>KLiC Advanced Excel</option>
+                    <option>KLiC Data Analytics &amp; Visualisation</option>
+                    <option>KLiC Hardware Support</option>
+                    <option>KLiC Network Support</option>
+                    <option>KLiC Cyber Security</option>
+                    <option>KLiC Digital Freelancing</option>
+                    <option>KLiC Google Workspace</option>
+                    <option>KLiC English</option>
+                    <option>KLiC Office Assistance</option>
+                    <option>KLiC Diploma (DCA/ADCA)</option>
+                    <option>CCTP Typing</option>
+                    <option>Other / Not listed</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Quick Reaction -->
+              <div class="fb-divider">Quick Reaction</div>
+
+              <div class="fb-group full">
+                <label class="fb-label">How was your experience? <span class="req">*</span></label>
+                <div class="emoji-row" id="emojiGroup">
+                  <button type="button" class="emoji-btn" data-val="😍 Excellent">
+                    <span class="em">😍</span>Excellent
+                  </button>
+                  <button type="button" class="emoji-btn" data-val="😊 Very Good">
+                    <span class="em">😊</span>Very Good
+                  </button>
+                  <button type="button" class="emoji-btn" data-val="🙂 Good">
+                    <span class="em">🙂</span>Good
+                  </button>
+                  <button type="button" class="emoji-btn" data-val="😐 Average">
+                    <span class="em">😐</span>Average
+                  </button>
+                  <button type="button" class="emoji-btn" data-val="😞 Poor">
+                    <span class="em">😞</span>Poor
+                  </button>
+                </div>
+                <input type="hidden" id="emojiVal" />
+              </div>
+
+              <!-- Detailed Feedback -->
+              <div class="fb-divider">Detailed Feedback</div>
+
+              <div class="fb-group full">
+                <label class="fb-label">What did you like the most? <span class="req">*</span></label>
+                <textarea class="fb-textarea" id="liked"
+                  placeholder="e.g. Teaching style, lab facilities, course content, faculty behaviour…"
+                  required></textarea>
+              </div>
+
+              <div class="fb-group full">
+                <label class="fb-label">What can we improve?</label>
+                <textarea class="fb-textarea" id="improve" placeholder="Honest suggestions help us get better…"
+                  style="min-height:90px;"></textarea>
+              </div>
+
+              <div class="fb-group full">
+                <label class="fb-label">Would you recommend Alfa Byte to others?</label>
+                <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:4px;">
+                  <label
+                    style="display:flex;align-items:center;gap:8px;padding:10px 20px;border-radius:8px;border:1.5px solid rgba(255,255,255,.12);background:rgba(255,255,255,.05);cursor:pointer;color:var(--gray);font-size:14px;transition:all .2s;"
+                    id="recYes">
+                    <input type="radio" name="recommend" value="Yes — Definitely!" style="display:none;" /> 👍 Yes,
+                    Definitely!
+                  </label>
+                  <label
+                    style="display:flex;align-items:center;gap:8px;padding:10px 20px;border-radius:8px;border:1.5px solid rgba(255,255,255,.12);background:rgba(255,255,255,.05);cursor:pointer;color:var(--gray);font-size:14px;transition:all .2s;"
+                    id="recMaybe">
+                    <input type="radio" name="recommend" value="Maybe" style="display:none;" /> 🤔 Maybe
+                  </label>
+                  <label
+                    style="display:flex;align-items:center;gap:8px;padding:10px 20px;border-radius:8px;border:1.5px solid rgba(255,255,255,.12);background:rgba(255,255,255,.05);cursor:pointer;color:var(--gray);font-size:14px;transition:all .2s;"
+                    id="recNo">
+                    <input type="radio" name="recommend" value="No" style="display:none;" /> 👎 No
+                  </label>
+                </div>
+              </div>
+
+              <div class="fb-group full">
+                <label class="fb-label">Any other message for our team?</label>
+                <textarea class="fb-textarea" id="message" placeholder="Anything else you'd like to share…"
+                  style="min-height:80px;"></textarea>
+              </div>
+
+            </div><!-- /fb-grid -->
+
+            <!-- Submit -->
+            <div class="fb-submit-wrap">
+              <button type="submit" class="fb-btn-submit" id="submitBtn">
+                ✨ &nbsp; Submit Feedback
+              </button>
+              <p class="fb-note">
+                Your feedback is private and goes directly to our team. &nbsp;|&nbsp;
+                <a href="index.html">← Back to Home</a>
+              </p>
+            </div>
+
+          </form>
+        </div><!-- /fb-body -->
+      </div><!-- /fb-card-inner -->
+    </div><!-- /fb-card -->
+
+    <!-- ══ SUCCESS CARD ══ -->
+    <div class="fb-success" id="successCard">
+      <div class="fb-success-inner">
+        <div class="fb-success-icon">🎉</div>
+        <h2 class="fb-success-title">Thank You!</h2>
+        <p class="fb-success-msg">
+          Your feedback has been received by the <strong>Alfa Byte Computers</strong> team.<br />
+          We truly value your time and will work on your suggestions!
+        </p>
+        <div class="fb-success-detail" id="successDetail"></div>
+        <a href="index.html" class="fb-btn-back">← Back to Home</a>
+      </div>
+    </div>
+
+    <!-- Trust row -->
+    <div class="fb-trust">
+      <div class="fb-trust-badge">🔒 100% Private &amp; Secure</div>
+      <div class="fb-trust-badge">📧 Delivered to our team instantly</div>
+      <div class="fb-trust-badge">⏱ Takes only 2 minutes</div>
+    </div>
+
+  </div><!-- /fb-page -->
+
+  <!-- ══════════ FOOTER ══════════ -->
+  <footer class="fb-footer">
+    <p>© 2025 <strong>Alfa Byte Computers</strong>, Indapur · All Rights Reserved</p>
+  </footer>
+
+  <!-- Cursor (same as site) -->
+  <div id="cursor-dot-wrapper" class="cursor-wrapper">
+    <div class="cursor-dot"></div>
+  </div>
+  <div id="cursor-aura-wrapper" class="cursor-wrapper">
+    <div class="cursor-aura"></div>
+  </div>
+
+  <!-- ══════════ SCRIPTS ══════════ -->
+  <script src="script.js"></script>
+
+  <script>
+    /* ══════════════════════════════════════════════
+       EMAILJS SETUP
+       ─────────────────────────────────────────────
+       STEPS TO ACTIVATE EMAIL DELIVERY:
+       1. Go to https://www.emailjs.com → Sign up FREE
+       2. Add an Email Service (Gmail recommended)
+          → copy your SERVICE ID  e.g. "service_abc123"
+       3. Create an Email Template with these variables:
+          {{from_name}}, {{occupation}}, {{course}},
+          {{rating}}, {{reaction}}, {{liked}},
+          {{improve}}, {{recommend}}, {{message}},
+          {{mobile}}, {{reply_to}}, {{submitted_at}}
+          → copy your TEMPLATE ID e.g. "template_xyz"
+       4. Go to Account → copy your PUBLIC KEY
+       5. Replace the three values below:
+    ══════════════════════════════════════════════ */
+    const EMAILJS_PUBLIC_KEY = 'YOUR_PUBLIC_KEY';   // ← paste here
+    const EMAILJS_SERVICE_ID = 'YOUR_SERVICE_ID';   // ← paste here
+    const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';  // ← paste here
+
+    emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+
+    /* ─── Star rating labels ─── */
+    const ratingLabels = { 1: '😞 Terrible', 2: '😕 Poor', 3: '🙂 Average', 4: '😊 Good', 5: '😍 Excellent!' };
+    document.querySelectorAll('.stars label').forEach(lbl => {
+      lbl.addEventListener('mouseenter', () => {
+        document.getElementById('ratingText').textContent = ratingLabels[lbl.previousElementSibling?.value || lbl.htmlFor.replace('s', '')];
+      });
+    });
+    document.querySelectorAll('.stars input').forEach(inp => {
+      inp.addEventListener('change', () => {
+        document.getElementById('ratingText').textContent = '⭐ ' + ratingLabels[inp.value] + ' — selected';
+      });
+    });
+
+    /* ─── Emoji reaction buttons ─── */
+    document.querySelectorAll('.emoji-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.emoji-btn').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        document.getElementById('emojiVal').value = btn.dataset.val;
+      });
+    });
+
+    /* ─── Recommend radio styling ─── */
+    document.querySelectorAll('input[name="recommend"]').forEach(inp => {
+      inp.addEventListener('change', () => {
+        ['recYes', 'recMaybe', 'recNo'].forEach(id => {
+          document.getElementById(id).style.borderColor = 'rgba(255,255,255,.12)';
+          document.getElementById(id).style.background = 'rgba(255,255,255,.05)';
+          document.getElementById(id).style.color = 'var(--gray)';
+        });
+        const lbl = inp.closest('label');
+        lbl.style.borderColor = 'var(--orange-light)';
+        lbl.style.background = 'rgba(234,88,12,.15)';
+        lbl.style.color = 'var(--orange-light)';
+      });
+    });
+
+    /* ─── Mobile digits only ─── */
+    document.getElementById('mobile').addEventListener('input', function () {
+      this.value = this.value.replace(/\D/g, '').slice(0, 10);
+    });
+
+    /* ─── Form submit ─── */
+    document.getElementById('feedbackForm').addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      /* Validate */
+      let valid = true;
+      const clr = el => { el.classList.remove('error', 'ok'); };
+      const err = el => { el.classList.add('error'); valid = false; };
+      const ok = el => { el.classList.add('ok'); };
+
+      const firstName = document.getElementById('firstName');
+      const lastName = document.getElementById('lastName');
+      const occupation = document.getElementById('occupation');
+      const liked = document.getElementById('liked');
+      const emojiVal = document.getElementById('emojiVal');
+      const ratingInp = document.querySelector('input[name="rating"]:checked');
+
+      [firstName, lastName, occupation, liked].forEach(clr);
+
+      if (firstName.value.trim().length < 2) { err(firstName); } else { ok(firstName); }
+      if (lastName.value.trim().length < 2) { err(lastName); } else { ok(lastName); }
+      if (!occupation.value) { err(occupation); } else { ok(occupation); }
+      if (liked.value.trim().length < 5) { err(liked); } else { ok(liked); }
+
+      if (!ratingInp) {
+        document.getElementById('starGroup').style.outline = '2px solid #f87171';
+        document.getElementById('starGroup').style.borderRadius = '8px';
+        valid = false;
+      } else {
+        document.getElementById('starGroup').style.outline = 'none';
+      }
+
+      if (!emojiVal.value) {
+        document.getElementById('emojiGroup').style.outline = '2px solid #f87171';
+        document.getElementById('emojiGroup').style.borderRadius = '12px';
+        valid = false;
+      } else {
+        document.getElementById('emojiGroup').style.outline = 'none';
+      }
+
+      if (!valid) {
+        const firstErr = document.querySelector('.fb-input.error, .fb-select.error, .fb-textarea.error');
+        if (firstErr) firstErr.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return;
+      }
+
+      /* Collect data */
+      const recommend = document.querySelector('input[name="recommend"]:checked');
+      const data = {
+        from_name: firstName.value.trim() + ' ' + lastName.value.trim(),
+        first_name: firstName.value.trim(),
+        last_name: lastName.value.trim(),
+        mobile: document.getElementById('mobile').value.trim() || 'Not provided',
+        reply_to: document.getElementById('email').value.trim() || 'Not provided',
+        occupation: occupation.value,
+        course: document.getElementById('course').value || 'Not selected',
+        rating: ratingInp.value + ' / 5 — ' + ratingLabels[ratingInp.value],
+        reaction: emojiVal.value,
+        liked: liked.value.trim(),
+        improve: document.getElementById('improve').value.trim() || 'No suggestion',
+        recommend: recommend ? recommend.value : 'No answer',
+        message: document.getElementById('message').value.trim() || '(None)',
+        submitted_at: new Date().toLocaleString('en-IN'),
+      };
+
+      /* Disable button & show spinner */
+      const btn = document.getElementById('submitBtn');
+      btn.disabled = true;
+      btn.innerHTML = '<span class="spinner"></span> Sending…';
+
+      try {
+        /* ── Try EmailJS first ── */
+        if (EMAILJS_PUBLIC_KEY !== 'YOUR_PUBLIC_KEY') {
+          await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, data);
+        } else {
+          /* ── Fallback: mailto (opens mail app) ── */
+          const subject = encodeURIComponent(`Feedback from ${data.from_name} — ${data.rating}`);
+          const body = encodeURIComponent(
+            `FEEDBACK — Alfa Byte Computers
+================================
+Name        : ${data.from_name}
+Mobile      : ${data.mobile}
+Email       : ${data.reply_to}
+Occupation  : ${data.occupation}
+Course      : ${data.course}
+
+RATING      : ${data.rating}
+REACTION    : ${data.reaction}
+
+LIKED       : ${data.liked}
+
+IMPROVE     : ${data.improve}
+
+RECOMMEND   : ${data.recommend}
+
+MESSAGE     : ${data.message}
+
+Submitted   : ${data.submitted_at}
+================================`
+          );
+          // window.open(`mailto:47210020@mkcl.org?subject=${subject}&body=${body}`, '_blank');
+        }
+
+        // ─── GOOGLE SHEETS INTEGRATION ───
+        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbziyWwV43sNj1YzdF5iiNe3i6zJc0rWqME3VPOgekPcdKhMVulJyJAyZ8OQwLZMPvTaMA/exec"; // ⚠️ Paste your Web App URL here!
+
+        if (GOOGLE_SCRIPT_URL) {
+          const formData = new URLSearchParams();
+          for (const key in data) {
+            formData.append(key, data[key]);
+          }
+
+          fetch(GOOGLE_SCRIPT_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            body: formData
+          }).then(response => {
+            console.log("Sent to Google Sheets");
+          }).catch((err) => {
+            console.error("Google Sheets error:", err);
+          });
+        }
+
+        /* Show success */
+        setTimeout(() => {
+          document.getElementById('feedbackCard').style.display = 'none';
+          const sc = document.getElementById('successCard');
+          sc.style.display = 'block';
+          sc.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+          document.getElementById('successDetail').innerHTML = `
+        <p>👤 <strong>Name:</strong> ${data.from_name}</p>
+        <p>💼 <strong>Occupation:</strong> ${data.occupation}</p>
+        <p>📚 <strong>Course:</strong> ${data.course}</p>
+        <p>⭐ <strong>Rating:</strong> ${data.rating}</p>
+        <p>😊 <strong>Reaction:</strong> ${data.reaction}</p>
+        <p>🕓 <strong>Submitted:</strong> ${data.submitted_at}</p>
+      `;
+        }, 800);
+
+      } catch (err) {
+        btn.disabled = false;
+        btn.innerHTML = '✨ &nbsp; Submit Feedback';
+        alert('Oops! Could not send. Please check your EmailJS setup or try again.');
+        console.error('EmailJS error:', err);
+      }
+    });
+  </script>
+
+</body>
+
+</html>

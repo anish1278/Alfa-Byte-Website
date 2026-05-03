@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alfa Byte Computers – Professional Training Institute</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ── TYPED ANIMATION ── */
+    .hero-typed-wrap {
+      min-height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 14px;
+    }
+
+    .hero-typed {
+      font-family: var(--font-serif);
+      font-size: clamp(22px, 3.5vw, 38px);
+      font-weight: 700;
+      color: var(--orange-light);
+      text-shadow: 0 0 30px rgba(251, 146, 60, 0.5);
+      letter-spacing: 1px;
+      border-right: 3px solid var(--orange-light);
+      white-space: nowrap;
+      overflow: hidden;
+      animation: blink-cursor 0.75s step-end infinite;
+    }
+
+    @keyframes blink-cursor {
+      50% {
+        border-color: transparent;
+      }
+    }
+
+    /* ── FEES BADGE ── */
+    .course-fee {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--orange-light);
+      margin-bottom: 4px;
+    }
+
+    /* ── WILL-CHANGE PERF HINT ── */
+    .course-card,
+    .feature-card,
+    .testi-card {
+      will-change: transform;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="bgCanvas"></canvas>
+
+  <!-- ═══════════ HEADER ═══════════ -->
+  <header class="header" id="mainHeader">
+    <div class="header-top">
+      <span>📞 Admissions Open &nbsp;|&nbsp; <strong>Call: +91 9175519757</strong> &nbsp;|&nbsp; ✉
+        47210020@mkcl.org</span>
+    </div>
+    <nav class="nav-wrap">
+      <a href="#" class="logo-area">
+        <div class="logo-svg-wrap">
+          <img src="images/logo.png" alt="Alfa Byte Logo"
+            style="width: 44px; height: 44px; border-radius: 50%; object-fit: cover;">
+        </div>
+        <div class="logo-text-wrap">
+          <span class="logo-name">Alfa Byte</span>
+          <span class="logo-tagline">Computers · Indapur</span>
+        </div>
+      </a>
+      <div class="nav-links">
+        <a href="#" class="active">Home</a>
+        <a href="#courses">Courses</a>
+        <a href="about.html">About Us</a>
+        <a href="#features">Why Us</a>
+        <a href="contact.html">Contact</a>
+        <a href="enroll.html" class="nav-cta">Enroll Now</a>
+      </div>
+      <div class="hamburger" id="hamburgerBtn">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ═══════════ HERO ═══════════ -->
+  <section class="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-badge">Admissions Open 2025–26</div>
+      <h1 class="hero-title">Alfa Byte <span>Computers</span></h1>
+      <p class="hero-subtitle">Professional Training Institute · Indapur</p>
+      <!-- Animated typing line -->
+      <div class="hero-typed-wrap">
+        <span class="hero-typed" id="heroTyped"></span>
+      </div>
+      <div class="hero-buttons">
+        <a href="#courses" class="btn-primary">Explore Courses</a>
+        <a href="contact.html" class="btn-outline">Contact Us</a>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <span>Scroll</span>
+      <div class="scroll-arrow"></div>
+    </div>
+  </section>
+
+  <!-- ═══════════ STATS ═══════════ -->
+  <section class="stats-section">
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="stat-number"><span class="counter" data-target="5000">0</span><span class="plus">+</span></div>
+        <div class="stat-label">Students Trained</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number"><span class="counter" data-target="30">0</span><span class="plus">+</span></div>
+        <div class="stat-label">Courses Offered</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number"><span class="counter" data-target="33">0</span><span class="plus">+</span></div>
+        <div class="stat-label">Years of Excellence</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number"><span class="counter" data-target="98">0</span><span class="plus">%</span></div>
+        <div class="stat-label">Placement Success</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ COURSES ═══════════ -->
+  <section class="section" id="courses">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">What We Offer</span>
+        <h2 class="section-title">Our Popular Courses</h2>
+        <p class="section-desc">Industry-relevant computer training programs designed for students, job-seekers, and
+          professionals.</p>
+        <div class="section-title-line"></div>
+      </div>
+      <div class="courses-tabs">
+        <button class="tab-btn active" data-filter="all">All Courses</button>
+        <button class="tab-btn" data-filter="office-basic">Office &amp; Basic</button>
+        <button class="tab-btn" data-filter="design">Design</button>
+        <button class="tab-btn" data-filter="programming">Programming</button>
+        <button class="tab-btn" data-filter="diploma">Diploma</button>
+      </div>
+      <div class="courses-grid">
+
+        <!-- MS-CIT -->
+        <div class="course-card" data-category="office-basic">
+          <div class="course-thumb">
+            <img src="images/mscit.png" alt="Course Image"
+              style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+            <div style="position:absolute;inset:0;background:linear-gradient(to top, rgba(0,0,0,0.8), transparent);">
+            </div>
+            <div class="course-icon"
+              style="position:absolute;bottom:12px;right:12px;font-size:24px;background:rgba(255,255,255,0.15);backdrop-filter:blur(5px);border-radius:50%;width:42px;height:42px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 10px rgba(0,0,0,0.3);">
+              🖥️</div>
+          </div>
+          <div class="course-body">
+            <span class="course-tag tag-purple">Most Popular</span>
+            <div class="course-name">MS-CIT</div>
+            <div class="course-fee">₹5,000/-</div>
+            <div class="course-desc">Maharashtra State Certificate in IT – govt. recognised, covers Windows, MS Office,
+              Internet & email.</div>
+            <div class="course-meta">
+              <span class="course-duration">⏱ 3 Months (120 Hrs)</span>
+              <a href="enroll.html?course=MS-CIT" class="course-enroll">Enroll Now →</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tally Prime with GST -->
+        <div class="course-card" data-category="office-basic">
+          <div class="course-thumb">
+            <img src="images/tally.jpg" alt="Course Image"
+              style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+            <div style="position:absolute;inset:0;background:linear-gradient(to top, rgba(0,0,0,0.8), transparent);">
+            </div>
+            <div class="course-icon"
+              style="position:absolute;bottom:12px;right:12px;font-size:24px;background:rgba(255,255,255,0.15);backdrop-filter:blur(5px);border-radius:50%;width:42px;height:42px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 10px rgba(0,0,0,0.3);">
+              📊</div>
+          </div>
+          <div class="course-body">
+            <span class="course-tag tag-orange">In Demand</span>
+            <div class="course-name">Tally Prime with GST</div>
+            <div class="course-fee">₹6,000/-</div>
+            <div class="course-desc">Complete Tally accounting with GST filing, billing, payroll management and
+              financial reports.</div>
+            <div class="course-meta">
+              <span class="course-duration">⏱ 2 Months (60 Hrs)</span>
+              <a href="enroll.html?course=Tally Prime with GST" class="course-enroll">Enroll Now →</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Advanced Excel -->
+        <div class="course-card" data-category="office-basic">
+          <div class="course-thumb">
+            <img src="images/excel.jpg" alt="Course Image"
+              style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+            <div style="position:absolute;inset:0;background:linear-gradient(to top, rgba(0,0,0,0.8), transparent);">
+            </div>
+            <div class="course-icon"
+              style="position:absolute;bottom:12px;right:12px;font-size:24px;background:rgba(255,255,255,0.15);backdrop-filter:blur(5px);border-radius:50%;width:42px;height:42px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 10px rgba(0,0,0,0.3);">
+              📈</div>
+          </div>
+          <div class="course-body">
+            <span class="course-tag tag-green">Office Track</span>
+            <div class="course-name">Advanced Excel</div>
+            <div class="course-fee">₹6,000/-</div>
+            <div class="course-desc">Formulas, Pivot Tables, VLOOKUP, Macros, Data Visualisation and Excel Automation
+              for professionals.</div>
+            <div class="course-meta">
+              <span class="course-duration">⏱ 2 Months (60 Hrs)</span>
+              <a href="enroll.html?course=Advanced Excel" class="course-enroll">Enroll Now →</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- C & C++ -->
+        <div class="course-card" data-category="programming">
+          <div class="course-thumb">
+            <img src="images/c_cpp.jpg" alt="Course Image"
+              style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+            <div style="position:absolute;inset:0;background:linear-gradient(to top, rgba(0,0,0,0.8), transparent);">
+            </div>
+            <div class="course-icon"
+              style="position:absolute;bottom:12px;right:12px;font-size:24px;background:rgba(255,255,255,0.15);backdrop-filter:blur(5px);border-radius:50%;width:42px;height:42px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 10px rgba(0,0,0,0.3);">
+              ⚙️</div>
+          </div>
+          <div class="course-body">
+            <span class="course-tag tag-purple">Programming</span>
+            <div class="course-name">C &amp; C++ Programming</div>
+            <div class="course-fee">₹6,000/-</div>
+            <div class="course-desc">Fundamentals of C and C++ programming – logic building, data structures and problem
+              solving.</div>
+            <div class="course-meta">
+              <span class="course-duration">⏱ 3 Months (90 Hrs)</span>
+              <a href="enroll.html?course=C and C++ Programming" class="course-enroll">Enroll Now →</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Python -->
+        <div class="course-card" data-category="programming">
+          <div class="course-thumb">
+            <img src="images/python.png" alt="Course Image"
+              style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+            <div style="position:absolute;inset:0;background:linear-gradient(to top, rgba(0,0,0,0.8), transparent);">
+            </div>
+            <div class="course-icon"
+              style="position:absolute;bottom:12px;right:12px;font-size:24px;background:rgba(255,255,255,0.15);backdrop-filter:blur(5px);border-radius:50%;width:42px;height:42px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 10px rgba(0,0,0,0.3);">
+              🐍</div>
+          </div>
+          <div class="course-body">
+            <span class="course-tag tag-purple">New Collar</span>
+            <div class="course-name">Python Programming</div>
+            <div class="course-fee">₹6,000/-</div>
+            <div class="course-desc">Python basics to advanced – scripting, automation, data handling and introduction
+              to AI/ML concepts.</div>
+            <div class="course-meta">
+              <span class="course-duration">⏱ 3 Months (90 Hrs)</span>
+              <a href="enroll.html?course=Python Programming" class="course-enroll">Enroll Now →</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Java -->
+        <div class="course-card" data-category="programming">
+          <div class="course-thumb">
+            <img src="images/java.png" alt="Course Image"
+              style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+            <div style="position:absolute;inset:0;background:linear-gradient(to top, rgba(0,0,0,0.8), transparent);">
+            </div>
+            <div class="course-icon"
+              style="position:absolute;bottom:12px;right:12px;font-size:24px;background:rgba(255,255,255,0.15);backdrop-filter:blur(5px);border-radius:50%;width:42px;height:42px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 10px rgba(0,0,0,0.3);">
+              ☕</div>
+          </div>
+          <div class="course-body">
+            <span class="course-tag tag-orange">Programming</span>
+            <div class="course-name">Java Programming</div>
+            <div class="course-fee">₹6,000/-</div>
+            <div class="course-desc">Core Java, OOP concepts, exception handling, file I/O and introduction to JDBC and
+              GUI applications.</div>
+            <div class="course-meta">
+              <span class="course-duration">⏱ 3 Months (90 Hrs)</span>
+              <a href="enroll.html?course=Java Programming" class="course-enroll">Enroll Now →</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Photoshop -->
+        <div class="course-card" data-category="design">
+          <div class="course-thumb">
+            <img src="images/photoshop.jpg" alt="Course Image"
+              style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+            <div style="position:absolute;inset:0;background:linear-gradient(to top, rgba(0,0,0,0.8), transparent);">
+            </div>
+            <div class="course-icon"
+              style="position:absolute;bottom:12px;right:12px;font-size:24px;background:rgba(255,255,255,0.15);backdrop-filter:blur(5px);border-radius:50%;width:42px;height:42px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 10px rgba(0,0,0,0.3);">
+              🎨</div>
+          </div>
+          <div class="course-body">
+            <span class="course-tag tag-purple">Design</span>
+            <div class="course-name">Photoshop</div>
+            <div class="course-fee">₹6,000/-</div>
+            <div class="course-desc">Adobe Photoshop for photo editing, retouching, poster design, digital art and
+              social media graphics.</div>
+            <div class="course-meta">
+              <span class="course-duration">⏱ 2 Months (60 Hrs)</span>
+              <a href="enroll.html?course=Photoshop" class="course-enroll">Enroll Now →</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Graphic Design -->
+        <div class="course-card" data-category="design">
+          <div class="course-thumb">
+            <img src="images/graphic_design.jpg" alt="Course Image"
+              style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+            <div style="position:absolute;inset:0;background:linear-gradient(to top, rgba(0,0,0,0.8), transparent);">
+            </div>
+            <div class="course-icon"
+              style="position:absolute;bottom:12px;right:12px;font-size:24px;background:rgba(255,255,255,0.15);backdrop-filter:blur(5px);border-radius:50%;width:42px;height:42px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 10px rgba(0,0,0,0.3);">
+              ✏️</div>
+          </div>
+          <div class="course-body">
+            <span class="course-tag tag-green">Design</span>
+            <div class="course-name">Graphic Design</div>
+            <div class="course-fee">₹6,000/-</div>
+            <div class="course-desc">CorelDRAW, Illustrator & Photoshop – professional design for print, branding and
+              digital media.</div>
+            <div class="course-meta">
+              <span class="course-duration">⏱ 4 Months (120 Hrs)</span>
+              <a href="enroll.html?course=Graphic Design" class="course-enroll">Enroll Now →</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Data Entry -->
+        <div class="course-card" data-category="office-basic">
+          <div class="course-thumb">
+            <img src="images/data_entry.jpg" alt="Course Image"
+              style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+            <div style="position:absolute;inset:0;background:linear-gradient(to top, rgba(0,0,0,0.8), transparent);">
+            </div>
+            <div class="course-icon"
+              style="position:absolute;bottom:12px;right:12px;font-size:24px;background:rgba(255,255,255,0.15);backdrop-filter:blur(5px);border-radius:50%;width:42px;height:42px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 10px rgba(0,0,0,0.3);">
+              ⌨️</div>
+          </div>
+          <div class="course-body">
+            <span class="course-tag tag-orange">Beginner</span>
+            <div class="course-name">Data Entry &amp; Typing</div>
+            <div class="course-fee">₹6,000/-</div>
+            <div class="course-desc">Fast &amp; accurate typing, data entry in MS Word/Excel, form filling – perfect for
+              government &amp; office jobs.</div>
+            <div class="course-meta">
+              <span class="course-duration">⏱ 1 Month (30 Hrs)</span>
+              <a href="enroll.html?course=Data Entry and Typing" class="course-enroll">Enroll Now →</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Web Development -->
+        <div class="course-card" data-category="programming">
+          <div class="course-thumb">
+            <img src="images/web.png" alt="Course Image"
+              style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+            <div style="position:absolute;inset:0;background:linear-gradient(to top, rgba(0,0,0,0.8), transparent);">
+            </div>
+            <div class="course-icon"
+              style="position:absolute;bottom:12px;right:12px;font-size:24px;background:rgba(255,255,255,0.15);backdrop-filter:blur(5px);border-radius:50%;width:42px;height:42px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 10px rgba(0,0,0,0.3);">
+              🌐</div>
+          </div>
+          <div class="course-body">
+            <span class="course-tag tag-purple">In Demand</span>
+            <div class="course-name">Web Development</div>
+            <div class="course-fee">₹6,000/-</div>
+            <div class="course-desc">HTML, CSS, JavaScript – build modern websites and landing pages from scratch.</div>
+            <div class="course-meta">
+              <span class="course-duration">⏱ 4 Months (120 Hrs)</span>
+              <a href="enroll.html?course=Web Development" class="course-enroll">Enroll Now →</a>
+            </div>
+          </div>
+        </div>
+
+
+
+        <!-- DCA / ADCA -->
+        <div class="course-card" data-category="diploma">
+          <div class="course-thumb">
+            <img src="images/diploma.png" alt="Course Image"
+              style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+            <div style="position:absolute;inset:0;background:linear-gradient(to top, rgba(0,0,0,0.8), transparent);">
+            </div>
+            <div class="course-icon"
+              style="position:absolute;bottom:12px;right:12px;font-size:24px;background:rgba(255,255,255,0.15);backdrop-filter:blur(5px);border-radius:50%;width:42px;height:42px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 10px rgba(0,0,0,0.3);">
+              🎓</div>
+          </div>
+          <div class="course-body">
+            <span class="course-tag tag-orange">Diploma</span>
+            <div class="course-name">DCA / ADCA Diploma</div>
+            <div class="course-fee">₹6,000/-</div>
+            <div class="course-desc">Diploma in Computer Applications – government-recognised certification covering all
+              core computer skills.</div>
+            <div class="course-meta">
+              <span class="course-duration">⏱ 6–12 Months</span>
+              <a href="enroll.html?course=DCA ADCA Diploma" class="course-enroll">Enroll Now →</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ WHY US ═══════════ -->
+  <section class="mkcl-section">
+    <h2 class="mkcl-title">Official MKCL Programs</h2>
+    <p class="mkcl-sub">Explore Government-Recognised Courses</p>
+
+    <div class="mkcl-cards">
+
+      <a href="https://mscit.mkcl.org/" target="_blank" class="mkcl-card">
+        <img src="images/mscit.png" alt="MS-CIT">
+        <span>MS-CIT Course</span>
+      </a>
+
+      <a href="https://webcast.mkcl.org/" target="_blank" class="mkcl-card">
+        <img src="images/mkcl.png" alt="MKCL">
+        <span>MKCL Webcast</span>
+      </a>
+
+      <a href="https://klic.mkcl.org/" target="_blank" class="mkcl-card">
+        <img src="images/klic.png" alt="KLiC">
+        <span>KLiC Courses</span>
+      </a>
+
+    </div>
+
+    <div class="mkcl-badge">
+      ✅ Verified MKCL Training Center
+    </div>
+  </section>
+
+  <section class="section features-section" id="features">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">Why Choose Us</span>
+        <h2 class="section-title">The Alfa Byte Advantage</h2>
+        <p class="section-desc">We combine experienced faculty, modern labs and industry-focused curriculum to deliver
+          real results.</p>
+        <div class="section-title-line"></div>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon fi-orange">🏆</div>
+          <div class="feature-title">Certified Instructors</div>
+          <div class="feature-desc">Learn from industry-certified trainers with 10+ years of hands-on experience in
+            their domains.</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon fi-purple">🖥️</div>
+          <div class="feature-title">Modern Computer Labs</div>
+          <div class="feature-desc">Fully equipped labs with latest hardware and software — individual system for every
+            student.</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon fi-green">📜</div>
+          <div class="feature-title">Government-Recognised Certificates</div>
+          <div class="feature-desc">Our certificates are accepted by government and private organisations across
+            Maharashtra.</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon fi-orange">💼</div>
+          <div class="feature-title">Placement Assistance</div>
+          <div class="feature-desc">Dedicated placement cell that connects students with local and national employers.
+          </div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon fi-purple">📅</div>
+          <div class="feature-title">Flexible Batch Timings</div>
+          <div class="feature-desc">Morning, afternoon and evening batches to suit students, homemakers and working
+            professionals.</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon fi-green">💬</div>
+          <div class="feature-title">Marathi &amp; Hindi Medium</div>
+          <div class="feature-desc">Courses taught in Marathi, Hindi and English — comfortable learning in your own
+            language.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ TESTIMONIALS ═══════════ -->
+  <section class="testi-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow" style="color:var(--orange-light)">Student Stories</span>
+        <h2 class="section-title">What Our Students Say</h2>
+        <p class="section-desc">Real feedback from real students who transformed their careers with Alfa Byte.</p>
+        <div class="section-title-line"></div>
+      </div>
+      <div class="testi-grid">
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"Alfa Byte ने माझ्या करिअरला नवी दिशा दिली. Tally course नंतर लगेच job मिळाली. Best
+            computer institute in Indapur!"</p>
+          <div class="testi-author">
+            <div class="testi-avatar">प</div>
+            <div>
+              <div class="testi-name">Pooja Shinde</div>
+              <div class="testi-role">Accounts Executive, Indapur</div>
+            </div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"The web development course was excellent. Teachers are very knowledgeable and patient.
+            I now freelance and earn well."</p>
+          <div class="testi-author">
+            <div class="testi-avatar">R</div>
+            <div>
+              <div class="testi-name">Rahul Patil</div>
+              <div class="testi-role">Freelance Web Developer</div>
+            </div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"Graphic design shiklo ani aata mala swatachi design agency ahe. Alfa Byte foundation
+            dili tya sathi dhanyavad!"</p>
+          <div class="testi-author">
+            <div class="testi-avatar">S</div>
+            <div>
+              <div class="testi-name">Snehal Kamble</div>
+              <div class="testi-role">Graphic Designer &amp; Entrepreneur</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="text-align: center; margin-top: 40px;">
+        <a href="feedback.html" class="btn-primary">Add Feedback</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ FOOTER ═══════════ -->
+  <footer id="contact">
+    <div class="footer-grid">
+
+      <!-- BRAND -->
+      <div class="footer-brand">
+        <a href="#" class="logo-area" style="margin-bottom:16px; display:inline-flex;">
+          <div class="logo-svg-wrap" style="border-color:rgba(234,88,12,0.5);">
+            <img src="images/logo.png" alt="Alfa Byte Logo"
+              style="width: 44px; height: 44px; border-radius: 50%; object-fit: cover;">
+          </div>
+
+          <div class="logo-text-wrap" style="margin-left:10px;">
+            <span class="logo-name">Alfa Byte Computers</span>
+            <span class="logo-tagline">Est. 1993 · Indapur</span>
+          </div>
+        </a>
+
+        <p class="footer-desc">
+          Empowering students and professionals with quality computer education since 1993.
+          Founded by Shri. Tushar Ranjankar. Located at Indapur Bazar, behind Nagar Palika.
+        </p>
+
+        <!-- SOCIAL ICONS -->
+        <div class="footer-social">
+          <a href="https://www.facebook.com/people/ALFA-BYTE-Computers/100057138893265/?rdid=vgbH1oYM02qNiKSu&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1KN3YXGJEV%2F"
+            target="_blank" class="social-btn facebook">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="https://www.instagram.com/alfa_byte_computers_indapur?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+            target="_blank" class="social-btn instagram">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="https://youtube.com/@alfabytecomputers6536?si=KI-njXYt1Pl988Pd" target="_blank"
+            class="social-btn youtube">
+            <i class="fab fa-youtube"></i>
+          </a>
+          <a href="mailto:47210020@mkcl.org" class="social-btn email">
+            <i class="fas fa-envelope"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- QUICK LINKS -->
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#">→ Home</a></li>
+          <li><a href="#courses">→ Courses</a></li>
+          <li><a href="#features">→ Why Us</a></li>
+          <li><a href="#">→ Gallery</a></li>
+          <li><a href="enroll.html">→ Admissions</a></li>
+        </ul>
+      </div>
+
+      <!-- COURSES -->
+      <div class="footer-col">
+        <h4>Top Courses</h4>
+        <ul>
+          <li><a href="enroll.html?course=MS-CIT">→ MS-CIT</a></li>
+          <li><a href="enroll.html?course=Tally Prime with GST">→ Tally Prime + GST</a></li>
+          <li><a href="enroll.html?course=Advanced Excel">→ Advanced Excel</a></li>
+          <li><a href="enroll.html?course=Web Development">→ Web Development</a></li>
+          <li><a href="enroll.html?course=DCA ADCA Diploma">→ DCA / ADCA Diploma</a></li>
+        </ul>
+      </div>
+
+      <!-- CONTACT -->
+      <div class="footer-col">
+        <h4>Contact Us</h4>
+        <ul>
+          <li><a href="#">📍 Indapur Bazar, behind Nagar Palika</a></li>
+          <li><a href="tel:+918888147742">📞 +91 8888147742</a></li>
+          <li><a href="mailto:info@alfabytecomputers.com">✉ info@alfabytecomputers.com</a></li>
+          <li><a href="#">🕐 Mon–Sat: 8am – 8pm</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- BOTTOM -->
+    <div class="footer-bottom">
+      <p>© 2025 <strong>Alfa Byte Computers</strong>. All rights reserved.</p>
+
+      <div class="footer-bottom-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Use</a>
+        <a href="#">Sitemap</a>
+      </div>
+    </div>
+  </footer>
+
+  <div id="cursor-dot-wrapper" class="cursor-wrapper">
+    <div class="cursor-dot"></div>
+  </div>
+  <div id="cursor-aura-wrapper" class="cursor-wrapper">
+    <div class="cursor-aura"></div>
+  </div>
+  <script src="script.js"></script>
+
+</body>
+
+</html>

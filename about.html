@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alfa Byte Computers – Professional Training Institute</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ── TYPED ANIMATION ── */
+    .hero-typed-wrap {
+      min-height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 14px;
+    }
+
+    .hero-typed {
+      font-family: var(--font-serif);
+      font-size: clamp(22px, 3.5vw, 38px);
+      font-weight: 700;
+      color: var(--orange-light);
+      text-shadow: 0 0 30px rgba(251, 146, 60, 0.5);
+      letter-spacing: 1px;
+      border-right: 3px solid var(--orange-light);
+      white-space: nowrap;
+      overflow: hidden;
+      animation: blink-cursor 0.75s step-end infinite;
+    }
+
+    @keyframes blink-cursor {
+      50% {
+        border-color: transparent;
+      }
+    }
+
+    /* ── MOBILE 2-COL COURSE GRID ── */
+    @media (max-width: 600px) {
+      .courses-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 14px !important;
+      }
+
+      .course-thumb {
+        height: 100px;
+      }
+
+      .course-icon {
+        font-size: 32px !important;
+      }
+
+      .course-body {
+        padding: 12px 12px 14px;
+      }
+
+      .course-name {
+        font-size: 13px;
+      }
+
+      .course-desc {
+        font-size: 11px;
+      }
+
+      .course-tag {
+        font-size: 9px;
+      }
+
+      .course-duration {
+        font-size: 10px;
+      }
+
+      .course-enroll {
+        font-size: 11px;
+      }
+    }
+
+    /* ── FEES BADGE ── */
+    .course-fee {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--orange-light);
+      margin-bottom: 4px;
+    }
+
+    /* ── WILL-CHANGE PERF HINT ── */
+    .course-card,
+    .feature-card,
+    .testi-card {
+      will-change: transform;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="bgCanvas"></canvas>
+
+  <!-- ═══════════ HEADER ═══════════ -->
+  <header class="header" id="mainHeader">
+    <div class="header-top">
+      <span>📞 Admissions Open &nbsp;|&nbsp; <strong>Call: +91 9175519757</strong> &nbsp;|&nbsp; ✉
+        47210020@mkcl.org</span>
+    </div>
+    <nav class="nav-wrap">
+      <a href="#" class="logo-area">
+        <div class="logo-svg-wrap">
+          <img src="images/logo.png" alt="Alfa Byte Logo"
+            style="width: 44px; height: 44px; border-radius: 50%; object-fit: cover;">
+        </div>
+        <div class="logo-text-wrap">
+          <span class="logo-name">Alfa Byte</span>
+          <span class="logo-tagline">Computers · Indapur</span>
+        </div>
+      </a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="index.html#courses">Courses</a>
+        <a href="about.html" class="active">About Us</a>
+        <a href="index.html#features">Why Us</a>
+        <a href="contact.html">Contact</a>
+        <a href="enroll.html" class="nav-cta">Enroll Now</a>
+      </div>
+      <div class="hamburger" id="hamburgerBtn">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </nav>
+  </header>
+  <main style="padding: 150px 24px 80px; max-width: 1200px; margin: 0 auto; color: white; min-height: 80vh;">
+    <div
+      style="background: rgba(10, 20, 40, 0.6); backdrop-filter: blur(12px); border-radius: 16px; border: 1px solid rgba(255,255,255,0.1); padding: 40px; box-shadow: 0 4px 24px rgba(0,0,0,0.3);">
+      <!-- HERO -->
+      <section class="page-hero reveal">
+        <h1
+          style="color:var(--orange-light); font-family:var(--font-serif); font-size:clamp(36px, 5vw, 56px); margin-bottom:10px;">
+          About Us</h1>
+        <p style="font-size:18px; color:var(--gray); letter-spacing:1px;">Empowering students with practical computer
+          skills</p>
+      </section>
+
+      <!-- ABOUT CONTENT -->
+      <section class="about-layout reveal">
+        <div class="about-text-col">
+          <h2 style="font-size:32px; font-family:var(--font-serif); color:white; margin-bottom:20px;">Who We Are</h2>
+          <p style="font-size:16px; color:var(--gray); line-height:1.8; margin-bottom:15px;">
+            Alfa Byte Computers is a leading training institute in Indapur, offering industry-relevant computer courses
+            with practical learning and certification since 1993.
+          </p>
+          <p style="font-size:16px; color:var(--gray); line-height:1.8;">
+            Our mission is to bridge the gap between theoretical knowledge and practical skills, preparing our students
+            for real-world challenges in the tech industry.
+          </p>
+        </div>
+        <div class="about-image-col">
+          <img src="images/course-ms-cit.jpg" alt="About Alfa Byte"
+            onerror="this.src='https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80&w=800';">
+        </div>
+      </section>
+
+      <!-- STATS -->
+      <section class="about-stats-container reveal">
+        <div class="about-stat-card">
+          <h3 class="counter" data-target="1000">2000+</h3>
+          <p>STUDENTS TRAINED</p>
+        </div>
+        <div class="about-stat-card">
+          <h3>33+</h3>
+          <p>YEARS EXPERIENCE</p>
+        </div>
+        <div class="about-stat-card">
+          <h3>20+</h3>
+          <p>CERTIFIED COURSES</p>
+        </div>
+      </section>
+
+      <!-- WHY CHOOSE US -->
+      <section class="reveal">
+        <h2 style="text-align:center; font-size:32px; font-family:var(--font-serif); color:white; margin-bottom:20px;">
+          Why Choose Us</h2>
+        <div class="why-choose-grid">
+          <div class="why-card">
+            <div class="why-icon">👨‍🏫</div>
+            <h3>Expert Trainers</h3>
+            <p>Learn from industry professionals with years of practical experience.</p>
+          </div>
+          <div class="why-card">
+            <div class="why-icon">💻</div>
+            <h3>Modern Labs</h3>
+            <p>Practice in our state-of-the-art computer labs with the latest software.</p>
+          </div>
+          <div class="why-card">
+            <div class="why-icon">📜</div>
+            <h3>Certified Courses</h3>
+            <p>Get recognized certifications that boost your career prospects.</p>
+          </div>
+          <div class="why-card">
+            <div class="why-icon">🤝</div>
+            <h3>Placement Support</h3>
+            <p>We provide career guidance and placement assistance to our top students.</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="owner-credit">
+        <span class="credit-text">Founder & Director</span>
+        <a href="https://www.tusharranjankar.com/" target="_blank" class="owner-name">
+          Tushar Ranjankar
+
+
+        </a>
+        <span class="credit-text">Since 1993</span>
+      </div>
+
+
+      <!-- CTA -->
+      <section class="about-cta reveal">
+        <h2>Start Your Career Today</h2>
+        <a href="enroll.html" class="liquid-btn">Enroll Now</a>
+      </section>
+    </div>
+  </main>
+  <!-- ═══════════ FOOTER ═══════════ -->
+  <footer id="contact">
+    <div class="footer-grid">
+
+      <!-- BRAND -->
+      <div class="footer-brand">
+        <a href="#" class="logo-area" style="margin-bottom:16px; display:inline-flex;">
+          <div class="logo-svg-wrap" style="border-color:rgba(234,88,12,0.5);">
+            <img src="images/logo.png" alt="Alfa Byte Logo"
+              style="width: 44px; height: 44px; border-radius: 50%; object-fit: cover;">
+          </div>
+
+          <div class="logo-text-wrap" style="margin-left:10px;">
+            <span class="logo-name">Alfa Byte Computers</span>
+            <span class="logo-tagline">Est. 1993 · Indapur</span>
+          </div>
+        </a>
+
+        <p class="footer-desc">
+          Empowering students and professionals with quality computer education since 1993.
+          Founded by Shri. Tushar Ranjankar. Located at Indapur Bazar, behind Nagar Palika.
+        </p>
+
+        <!-- SOCIAL ICONS -->
+        <div class="footer-social">
+          <a href="https://www.facebook.com/people/ALFA-BYTE-Computers/100057138893265/?rdid=vgbH1oYM02qNiKSu&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1KN3YXGJEV%2F"
+            target="_blank" class="social-btn facebook">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="https://www.instagram.com/alfa_byte_computers_indapur?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+            target="_blank" class="social-btn instagram">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="https://youtube.com/@alfabytecomputers6536?si=KI-njXYt1Pl988Pd" target="_blank"
+            class="social-btn youtube">
+            <i class="fab fa-youtube"></i>
+          </a>
+          <a href="mailto:47210020@mkcl.org" class="social-btn email">
+            <i class="fas fa-envelope"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- QUICK LINKS -->
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#">→ Home</a></li>
+          <li><a href="#courses">→ Courses</a></li>
+          <li><a href="#features">→ Why Us</a></li>
+          <li><a href="#">→ Gallery</a></li>
+          <li><a href="enroll.html">→ Admissions</a></li>
+        </ul>
+      </div>
+
+      <!-- COURSES -->
+      <div class="footer-col">
+        <h4>Top Courses</h4>
+        <ul>
+          <li><a href="enroll.html?course=MS-CIT">→ MS-CIT</a></li>
+          <li><a href="enroll.html?course=Tally Prime with GST">→ Tally Prime + GST</a></li>
+          <li><a href="enroll.html?course=Advanced Excel">→ Advanced Excel</a></li>
+          <li><a href="enroll.html?course=Web Development">→ Web Development</a></li>
+          <li><a href="enroll.html?course=DCA ADCA Diploma">→ DCA / ADCA Diploma</a></li>
+        </ul>
+      </div>
+
+      <!-- CONTACT -->
+      <div class="footer-col">
+        <h4>Contact Us</h4>
+        <ul>
+          <li><a href="#">📍 Indapur Bazar, behind Nagar Palika</a></li>
+          <li><a href="tel:+918888147742">📞 +91 8888147742</a></li>
+          <li><a href="mailto:info@alfabytecomputers.com">✉ info@alfabytecomputers.com</a></li>
+          <li><a href="#">🕐 Mon–Sat: 8am – 8pm</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- BOTTOM -->
+    <div class="footer-bottom">
+      <p>© 2025 <strong>Alfa Byte Computers</strong>. All rights reserved.</p>
+
+      <div class="footer-bottom-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Use</a>
+        <a href="#">Sitemap</a>
+      </div>
+    </div>
+  </footer>
+
+  <div id="cursor-dot-wrapper" class="cursor-wrapper">
+    <div class="cursor-dot"></div>
+  </div>
+  <div id="cursor-aura-wrapper" class="cursor-wrapper">
+    <div class="cursor-aura"></div>
+  </div>
+  <script src="script.js"></script>
+
+</body>
+
+</html>
